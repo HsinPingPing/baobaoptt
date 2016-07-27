@@ -197,7 +197,7 @@ function receivedMessage(event) {
   var messageAttachments = message.attachments;
 
   if (messageText) {
-    meow(senderID, messageText);
+    baobao(senderID, messageText);
   } else if (messageAttachments) {
     // gulis(senderID, messageAttachments, 'attachments');
   } else {
@@ -256,6 +256,51 @@ function receivedPostback(event) {
   var msg = msgs[Math.floor(Math.random() * msgs.length)];
 
   sendTextMessage(senderID, '已加入 ' + payload + '，' + msg);
+}
+
+function baobao(recipientId, messageText) {
+
+  var recommendations = [
+    {
+        title: "馬尼拉",
+        subtitle: "派對桌遊",
+        image_url: "http://1.bp.blogspot.com/-Afm9ghsoois/VQM0CXHsKII/AAAAAAAAhAQ/gEutlTasZdk/s1600/pic2251077_lg.png",
+        buttons: [{
+          type: "postback",
+          title: "#馬尼拉",
+          payload: "#馬尼拉",
+        }]
+    },
+    {
+        title: "閃靈快手",
+        subtitle: "派對桌遊",
+        image_url: "http://pic.pimg.tw/bghut/a3a9bf3f30fdfda7adb9852c80b7be6c.jpg",
+        buttons: [{
+          type: "postback",
+          title: "#閃靈快手",
+          payload: "#閃靈快手",
+        }]
+    }
+  ];
+
+  var response = {
+      recipient :{
+          id: recipientId
+      },
+      message: {
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: []
+          }
+        }
+      }
+  };
+
+  response.message.attachment.payload.elements = recommendations;
+
+  callSendAPI(response);
 }
 
 function meow(recipientId, messageText) {
