@@ -264,7 +264,7 @@ function baobao(recipientId, messageText) {
     {
         title: "馬尼拉",
         subtitle: "派對桌遊",
-        image_url: "http://1.bp.blogspot.com/-Afm9ghsoois/VQM0CXHsKII/AAAAAAAAhAQ/gEutlTasZdk/s1600/pic2251077_lg.png",
+        image_url: "http://i.imgur.com/c2pD0C3.png",
         buttons: [{
           type: "postback",
           title: "#馬尼拉",
@@ -274,7 +274,7 @@ function baobao(recipientId, messageText) {
     {
         title: "閃靈快手",
         subtitle: "派對桌遊",
-        image_url: "http://pic.pimg.tw/bghut/a3a9bf3f30fdfda7adb9852c80b7be6c.jpg",
+        image_url: "http://i.imgur.com/uUGJW01.jpg",
         buttons: [{
           type: "postback",
           title: "#閃靈快手",
