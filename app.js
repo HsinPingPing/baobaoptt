@@ -263,7 +263,7 @@ function meow(recipientId, messageText) {
   var whoru = ['你是誰', '你叫什麼名字', '欸', '你誰', '名字', "what's your name", 'hey'];
   var meowText;
   if (whoru.indexOf(messageText.replace('?','')) >= 0) {
-    meowText = '阿雞，BoBo的老大';
+    meowText = '寶寶想買BOT寶寶不說';
   } else {
     var meowTextList = ['喵喵', '朕知道了', '餵我', '摸我', '愛你', '不爽', '(伸懶腰)', '(懶洋洋)', '喵', '(翻肚)', '(打滾)', '(鹹貓手)', '看啥'];
     meowText = meowTextList[Math.floor(Math.random() * meowTextList.length)];
