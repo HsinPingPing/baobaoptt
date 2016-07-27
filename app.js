@@ -197,7 +197,8 @@ function receivedMessage(event) {
   var messageAttachments = message.attachments;
 
   if (messageText) {
-    baobao(senderID, messageText);
+    baobao(senderID, messageText, false);
+    // baobao(senderID, messageText);
   } else if (messageAttachments) {
     // gulis(senderID, messageAttachments, 'attachments');
   } else {
@@ -253,17 +254,20 @@ function receivedPostback(event) {
 
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
-  var msg = msgs[Math.floor(Math.random() * msgs.length)];
+  // var msg = msgs[Math.floor(Math.random() * msgs.length)];
 
-  sendTextMessage(senderID, '已加入 ' + payload + '，' + msg);
+  // sendTextMessage(senderID, '已加入 ' + payload + '，' + msg);
+  baobao(senderID, '', true);
+
+
 }
 
-function baobao(recipientId, messageText) {
+function baobao(recipientId, messageText, postback) {
 
   var recommendations = [
     {
         title: "馬尼拉",
-        subtitle: "派對桌遊",
+        subtitle: "Ghost Blitz",
         image_url: "http://i.imgur.com/c2pD0C3.png",
         buttons: [{
           type: "postback",
@@ -275,6 +279,17 @@ function baobao(recipientId, messageText) {
         title: "閃靈快手",
         subtitle: "派對桌遊",
         image_url: "http://i.imgur.com/uUGJW01.jpg",
+        buttons: [{
+          type: "postback",
+          title: "#閃靈快手",
+          payload: "#閃靈快手",
+        }]
+    }
+  ];
+
+  var more = [
+    {
+        image_url: "http://i.imgur.com/0yKBLwI.png",
         buttons: [{
           type: "postback",
           title: "#閃靈快手",
@@ -298,111 +313,12 @@ function baobao(recipientId, messageText) {
       }
   };
 
-  response.message.attachment.payload.elements = recommendations;
-
-  callSendAPI(response);
-}
-
-function meow(recipientId, messageText) {
-
-  var whoru = ['你是誰', '你叫什麼名字', '欸', '你誰', '名字', "what's your name", 'hey'];
-  var meowText;
-  if (whoru.indexOf(messageText.replace('?','')) >= 0) {
-    meowText = '寶寶想買BOT寶寶不說';
+  if(postback) {
+    response.message.attachment.payload.elements = more;
   } else {
-    var meowTextList = ['喵喵', '朕知道了', '餵我', '摸我', '愛你', '不爽', '(伸懶腰)', '(懶洋洋)', '喵', '(翻肚)', '(打滾)', '(鹹貓手)', '看啥'];
-    meowText = meowTextList[Math.floor(Math.random() * meowTextList.length)];
+    response.message.attachment.payload.elements = recommendations;
   }
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text: meowText
-    }
-  };
-  callSendAPI(messageData);
-}
-
-function gulis(recipientId, message, messageType) {
-
-    // slack monkey Beauty API
-    var uri = 'http://hack.wjhuang.net:3000/bot/index';
-
-    var messageData = '';
-    var res;
-
-    if (messageType == 'text' && message.indexOf('踹共') === 0) {
-
-        var messageData = {
-            recipient :{
-                id: recipientId
-            },
-            message: {
-              attachment: {
-                type: "template",
-                payload: {
-                  template_type: "generic",
-                  elements: [
-                    {
-                        title: "統一獅",
-                        subtitle: "中韓職棒熱身賽－警察廳vs統一獅",
-                        image_url: "https://i.ytimg.com/vi/pkC6NAvJlCE/hqdefault.jpg",
-                        buttons: [{
-                          type: "postback",
-                          title: "參上",
-                          payload: "#統一獅",
-                        }]
-                    },
-                    {
-                        title: "佼心食堂",
-                        subtitle: "梁家輝、彭于晏",
-                        image_url: "https://s.yimg.com/uu/api/res/1.2/VWWR2E0ETGDrq8zIFfo3gw--/Zmk9ZmlsbDtweW9mZj0wO3c9MjM0O2g9MTU0O3NtPTE7YXBwaWQ9eXRhY2h5b24-/http://media.zenfs.com/en-US/video/video.pd2upload.com/video.yahootwlive.com@0940b788-2c38-3579-9b7d-2f8aca2652c5_FULL.jpg",
-                        buttons: [{
-                          type: "postback",
-                          title: "參上",
-                          payload: "#佼心食堂"
-                        }]
-                    },
-                    {
-                        title: "唐立淇測風向",
-                        subtitle: "勞工問題效應，還會持續至何時？",
-                        image_url: "https://s.yimg.com/uu/api/res/1.2/fuJ1wSLEroKuuFzAm1LyQQ--/Zmk9ZmlsbDtweW9mZj0wO3c9MTQ2O2g9ODI7c209MTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/creatr-images/GLB/2016-06-27/444747c0-3c93-11e6-a7e7-ed25d9b81d27_snaps-5-about-on-yahoo-legacy_it.jpg",
-                        buttons: [{
-                          type: "postback",
-                          title: "參上",
-                          payload: "#唐立淇測風向"
-                        }]
-                    },
-                    {
-                        title: "影音名人堂",
-                        subtitle: "【雞排炸新聞】相親後被要求卸妝給對方看",
-                        image_url: "https://s.yimg.com/uu/api/res/1.2/MP8vyb9sINNRuYQNmdy6nA--/Zmk9ZmlsbDtweW9mZj0wO3c9MTQ2O2g9ODI7c209MTthcHBpZD15dGFjaHlvbg--/http://media.zenfs.com/en-US/video/video.pd2upload.com/video.yahooscreen.com@2112bd55-c1ae-35b8-bfaa-816a6381f917_FULL.png",
-                        buttons: [{
-                          type: "postback",
-                          title: "參上",
-                          payload: "#影音名人堂"
-                        }]
-                    }]
-                }
-            }
-            }
-        };
-        callSendAPI(messageData);
-    }
-    else {
-        request.post(uri, {
-            form: {
-                userid: recipientId,
-                message: message || '',
-                platform: 'facebook',
-                type: messageType,
-                user: true
-            }
-        }, function (error, response, body) {
-            // do nothing
-        });
-    };
+  callSendAPI(response);
 }
 
 /*
