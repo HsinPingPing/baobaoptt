@@ -289,11 +289,13 @@ function baobao(recipientId, messageText, postback) {
 
   var more = [
     {
+        title: "閃靈快手",
+        subtitle: "派對桌遊",
         image_url: "http://i.imgur.com/0yKBLwI.png",
         buttons: [{
-          type: "postback",
-          title: "#閃靈快手",
-          payload: "#閃靈快手",
+          type: "web_url",
+          url: "https://tw.search.yahoo.com/search?p=%E9%96%83%E9%9D%88%E5%BF%AB%E6%89%8B",
+          title: "看更多",
         }]
     }
   ];
