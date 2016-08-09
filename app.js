@@ -19,7 +19,6 @@ const
   request = require('request');
 
 var app = express();
-var msgs = ['大聲講話啊', '一起踹共啊', '快點打字啊'];
 
 app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
@@ -67,6 +66,18 @@ app.get('/webhook', function(req, res) {
   }
 });
 
+app.get('/test', function(req, res) {
+
+    var flaskBackend = 'http://oxy-oxygen-0a52c618.corp.sg3.yahoo.com:5000/boardgame/'+encodeURIComponent(req.query.sent);
+
+    request.get(flaskBackend, function(error, response, body) {
+        // parse JSON string to object
+        // var recommendations = JSON.parse(body);
+        var recommendations = [];
+        /// ....
+    });
+
+});
 
 /*
  * All callbacks for Messenger are POST-ed. They will be sent to the same
