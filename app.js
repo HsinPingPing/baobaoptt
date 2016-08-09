@@ -75,6 +75,7 @@ app.get('/test', function(req, res) {
         // var recommendations = JSON.parse(body);
         var recommendations = [];
         /// ....
+        res.status(200).send(body).end();
     });
 
 });
