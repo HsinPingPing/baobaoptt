@@ -67,15 +67,17 @@ app.get('/webhook', function(req, res) {
 });
 
 app.get('/test', function(req, res) {
-
-    var flaskBackend = 'http://oxy-oxygen-0a52c618.corp.sg3.yahoo.com:5000/boardgame/'+encodeURIComponent(req.query.sent);
+    
+    console.log(req.query.sent);
+    var flaskBackend = 'http://oxy-oxygen-0a52c618.corp.sg3.yahoo.com:5000/trigger/'+encodeURIComponent(req.query.sent);
 
     request.get(flaskBackend, function(error, response, body) {
+        console.log(body);
         // parse JSON string to object
         // var recommendations = JSON.parse(body);
         var recommendations = [];
         /// ....
-        res.status(200).send(body).end();
+        res.status(200).send(JSON.parse(body));
     });
 
 });
@@ -275,8 +277,19 @@ function receivedPostback(event) {
 }
 
 function baobao(recipientId, messageText, postback) {
+    
+    console.log(messageText);
+    var flaskBackend = 'http://oxy-oxygen-0a52c618.corp.sg3.yahoo.com:5000/trigger/' + encodeURIComponent(messageText);
+    
+    request.get(flaskBackend, function(error, response, body) {
+        console.log(body);
+        // parse JSON string to object
+        // var recommendations = JSON.parse(body);
+        var recommendations = JSON.parse(body);
+        //var more = body;
+    });
 
-  var recommendations = [
+  /*var recommendations = [
     {
         title: "馬尼拉",
         subtitle: "Ghost Blitz",
@@ -298,6 +311,8 @@ function baobao(recipientId, messageText, postback) {
         }]
     }
   ];
+  */
+    
 
   var more = [
     {
